@@ -1,4 +1,4 @@
-package works.lucid.mso.greenmail
+package works.lucid.testdoubles.greenmail
 
 import com.icegreen.greenmail.configuration.PropertiesBasedGreenMailConfigurationBuilder
 import com.icegreen.greenmail.server.BuildInfo
