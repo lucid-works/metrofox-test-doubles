@@ -3,9 +3,9 @@ jdk:
 - oraclejdk12
 before_install:
 - openssl aes-256-cbc -K $encrypted_b836b1ff717a_key -iv $encrypted_b836b1ff717a_iv
-  -in travis_rsa.enc -out travis_rsa -d
-- chmod 600 travis_rsa
-- mv travis_rsa ~/.ssh/id_rsa
+  -in lucid_works.enc -out lucid_works -d
+- chmod 600 lucid_works
+- mv lucid_works ~/.ssh/id_rsa
 jobs:
   include:
   - stage: build
@@ -19,7 +19,6 @@ jobs:
     - docker push auxilyo/auxilyo-wiremock:$TRAVIS_BUILD_NUMBER
     - docker build --file auxilyo-test-doubles-greenmail/Dockerfile --build-arg JAR_FILE=auxilyo-test-doubles-greenmail/build/libs/auxilyo-test-doubles-greenmail.jar
       --build-arg INFO_APP_BUILD=$TRAVIS_BUILD_NUMBER --tag auxilyo/auxilyo-greenmail:$TRAVIS_BUILD_NUMBER
-      .
     - docker push auxilyo/auxilyo-greenmail:$TRAVIS_BUILD_NUMBER
   - stage: DEV deploy
     install:
