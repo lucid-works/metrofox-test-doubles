@@ -1,0 +1,17 @@
+/.gradle/
+
+**/build/
+**/out/
+**/bin/
+
+.project
+
+/.idea/*
+!/.idea/runConfigurations
+!/.idea/codeStyles
+
+**/.gradle/*
+
+**/main/protoGen
+
+**/.attach_pid*

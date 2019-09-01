@@ -1,0 +1,18 @@
+version: "3"
+services:
+  greenmail-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: "build/libs/my-security-officer-greenmail.jar"
+    hostname: greenmail-server
+    ports:
+      - "9191:8080"
+      - "3025:3025"
+      - "3110:3110"
+      - "3143:3143"
+      - "3465:3465"
+      - "3993:3993"
+      - "3995:3995"
+    restart: always

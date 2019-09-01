@@ -1,0 +1,3 @@
+rootProject.name = 'auxilyo-test-doubles'
+include 'auxilyo-test-doubles-wiremock'
+include 'auxilyo-test-doubles-greenmail'

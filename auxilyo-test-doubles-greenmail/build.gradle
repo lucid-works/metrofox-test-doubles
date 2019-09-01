@@ -1,0 +1,83 @@
+apply plugin: 'kotlin'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'kotlin-spring'
+apply plugin: 'org.springframework.boot'
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://s3-us-west-2.amazonaws.com/dynamodb-local/release" }
+}
+
+dependencies {
+    implementation(
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.cloud:spring-cloud-starter-function-web',
+            'org.springframework.cloud:spring-cloud-function-kotlin',
+            'com.fasterxml.jackson.core:jackson-core',
+            'io.projectreactor:reactor-core',
+            'org.jetbrains.kotlin:kotlin-stdlib-jdk8',
+            'org.springframework.boot:spring-boot-starter-actuator',
+            'org.springframework.boot:spring-boot-starter-web',
+            'com.icegreen:greenmail'
+    )
+
+    testCompile 'org.springframework.boot:spring-boot-starter-aop'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter',
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.mockito:mockito-core',
+            'org.mockito:mockito-junit-jupiter',
+            'org.hamcrest:java-hamcrest',
+            'org.jetbrains.kotlin:kotlin-test'
+    )
+
+    testRuntimeOnly(
+            'com.almworks.sqlite4java:sqlite4java'
+    )
+}
+
+dependencyManagement {
+    dependencies {
+        libraries.each {
+            library -> dependency library.value
+        }
+    }
+    imports {
+        mavenBom "io.projectreactor:reactor-bom:${versions.reactorBomVersion}"
+    }
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-starter-parent:${versions.springBootVersion}"
+    }
+}
+
+task allDependencies(type: DependencyReportTask) {}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter'
+        excludeEngines 'junit-vintage'
+    }
+}
+
+bootJar {
+    version = null
+}
