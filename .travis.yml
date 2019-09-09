@@ -35,4 +35,5 @@ jobs:
       docker run -d --rm -p 9090:8080 auxilyo/auxilyo-wiremock:$TRAVIS_BUILD_NUMBER
       docker run -d --rm -p 3025:3025 -p 3110:3110 -p 3143:3143 -p 3465:3465 -p 3993:3993 -p 3995:3995 auxilyo/auxilyo-greenmail:$TRAVIS_BUILD_NUMBER
       docker run -e POSTGRES_DB=postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 postgres
+      docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.3.1
       EOT
