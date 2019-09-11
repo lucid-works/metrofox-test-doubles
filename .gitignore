@@ -8,7 +8,6 @@
 
 /.idea/*
 !/.idea/runConfigurations
-!/.idea/codeStyles
 /.idea/codeStyles/Project.xml
 
 **/.gradle/*
