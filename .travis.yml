@@ -28,7 +28,7 @@ jobs:
     - true
     script:
     - |
-      ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@auxilyo-test-doubles.lucid.works /bin/bash -s << EOT
+      ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@metrofox-test-doubles.lucid.works /bin/bash -s << EOT
       docker ps -a -q | xargs docker stop;
       docker images -a -q | xargs docker rmi;
       docker system prune -a -f;
