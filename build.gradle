@@ -23,7 +23,7 @@ buildscript {
 apply from: 'dependency.gradle'
 
 allprojects {
-    group = 'com.auxilyo'
+    group = 'com.metrofox'
     version = "${version}"
 }
 

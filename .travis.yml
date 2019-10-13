@@ -14,12 +14,12 @@ jobs:
     script:
     - "./gradlew build --stacktrace --scan"
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - docker build --file auxilyo-test-doubles-wiremock/Dockerfile
+    - docker build --file metrofox-test-doubles-wiremock/Dockerfile
       --build-arg INFO_APP_BUILD=$TRAVIS_BUILD_NUMBER
       --tag auxilyo/auxilyo-wiremock:$TRAVIS_BUILD_NUMBER .
     - docker push auxilyo/auxilyo-wiremock:$TRAVIS_BUILD_NUMBER
-    - docker build --file auxilyo-test-doubles-greenmail/Dockerfile
-      --build-arg JAR_FILE=auxilyo-test-doubles-greenmail/build/libs/auxilyo-test-doubles-greenmail.jar
+    - docker build --file metrofox-test-doubles-greenmail/Dockerfile
+      --build-arg JAR_FILE=metrofox-test-doubles-greenmail/build/libs/metrofox-test-doubles-greenmail.jar
       --build-arg INFO_APP_BUILD=$TRAVIS_BUILD_NUMBER
       --tag auxilyo/auxilyo-greenmail:$TRAVIS_BUILD_NUMBER .
     - docker push auxilyo/auxilyo-greenmail:$TRAVIS_BUILD_NUMBER
