@@ -28,10 +28,12 @@ jobs:
     - true
     script:
     - |
-      ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@test-doubles.metrofoxsecurity.com /bin/bash -s << EOT
+      scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no metrofox-test-doubles-kafka/docker-compose.yml root@metrofox-test-doubles.lucid.works:~/docker-compose-kafka.yml
+      ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@metrofox-test-doubles.lucid.works /bin/bash -s << EOT
       docker ps -a -q | xargs -r docker stop;
       docker images -a -q | xargs -r docker rmi;
       docker system prune -a -f;
       docker run -d --rm -p 9090:8080 metrofoxservices/metrofox-test-doubles-wiremock:$TRAVIS_BUILD_NUMBER
       docker run -d --rm -p 3025:3025 -p 3110:3110 -p 3143:3143 -p 3465:3465 -p 3993:3993 -p 3995:3995 metrofoxservices/metrofox-test-doubles-greenmail:$TRAVIS_BUILD_NUMBER
+      docker-compose -f docker-compose-kafka.yml up -d;
       EOT
