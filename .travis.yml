@@ -29,7 +29,7 @@ jobs:
     script:
     - |
       scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no metrofox-test-doubles-kafka/docker-compose.yml root@metrofox-test-doubles.lucid.works:~/docker-compose-kafka.yml
-      ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@metrofox-test-doubles.lucid.works /bin/bash -s << EOT
+      ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@test-doubles.metrofoxsecurity.com /bin/bash -s << EOT
       docker ps -a -q | xargs -r docker stop;
       docker images -a -q | xargs -r docker rmi;
       docker system prune -a -f;
