@@ -33,5 +33,5 @@ jobs:
       docker ps -a -q | xargs -r docker stop;
       docker images -a -q | xargs -r docker rmi;
       docker system prune -a -f;
-      docker run -d --rm -p 9090:8080 metrofoxservices/metrofox-test-doubles-wiremock:$TRAVIS_BUILD_NUMBER
+      docker-compose -f docker-compose-kafka.yml up -d;
       EOT
